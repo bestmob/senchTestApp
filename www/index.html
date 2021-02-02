@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capture Photo</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value 
+
+    // Wait for Cordova to connect with the device
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // Cordova is ready to be used!
+    //
+    function onDeviceReady() {
+        pictureSource=Camera.PictureSourceType;
+        destinationType=Camera.DestinationType;
+    }
+    // Called when a photo is successfully retrieved
+    function onPhotoDataSuccess(imageData) {
+      var smallImage = document.getElementById('smallImage');
+      smallImage.style.display = 'block';
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+    }
+    
+    // Called when a photo is successfully retrieved
+    function onPhotoURISuccess(imageURI) {
+      var largeImage = document.getElementById('largeImage');
+      largeImage.style.display = 'block';
+      largeImage.src = imageURI;
+    }
+
+    // A button will call this function
+    function takePicture() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.customCamera.getPicture("latest_scan.jpg", onPhotoDataSuccess, onFail, { quality: 100, targetWidth:1000, targetHeight:-1 });
+    }
+    // A button will call this function
+    function takePicture1() {
+      cordova.exec(onPhotoDataSuccess, onFail, "CustomCamera", "takePicture", ["latest_scan.jpg", 100, 1000, -1]);
+    }
+    // A button will call this function
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        destinationType: destinationType.DATA_URL });
+    }
+    // A button will call this function
+    function getPhoto(source) {
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,  destinationType: destinationType.FILE_URI, sourceType: source });
+    }
+
+    // Called if something bad happens.
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
+
+    </script>
+  </head>
+  <body>
+    <button onclick="takePicture();">Capture Photo using custom plugin</button> <br>
+    <button onclick="takePicture1();">Capture Photo using custom Cordova exec</button> <br>
+    <button onclick="capturePhoto();">Capture Photo using Camera plugin</button> <br>
+    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+    <img style="display:none;width: 70%;" id="largeImage" src="" />
+  </body>
+</html>
