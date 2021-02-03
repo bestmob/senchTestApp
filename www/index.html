@@ -2,8 +2,11 @@
 <html>
   <head>
     <title>Capture Photo</title>
-
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src * 'unsafe-inline' 'unsafe-eval'">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, viewport-fit=cover">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
 
     var pictureSource;   // picture source
@@ -63,11 +66,21 @@
     function MultipleImageSelection() {
       cordova.plugins.MultipleImageSelectionPlugin.select([""], function j(k) {
         console.log("multiple image selection >>>>>");
-        console.log(k);
-        alert(JSON.stringify(k));
+        $('#downloadedImageDiv').empty();
+        for (var e = 0; e < k.length; e++) {
+          var imageData = "data:image/jpeg;base64," + k[e];
+          var img = $('<img />', { 
+            src: imageData,
+            alt: 'Lamp',
+            width: 70,
+            height: 70,
+            style: 'background-color: rgb(179, 179, 179); margin-bottom: 6px; width: 70px; height:70px; margin-right: 6px;',
+          });
+          img.appendTo($('#downloadedImageDiv'));
+        }
       }, function e() {
         console.log("fail");
-        onFail();
+        onFail('fail');
       })
     }
     </script>
@@ -78,9 +91,14 @@
     <button onclick="capturePhoto();">Capture Photo using Camera plugin</button> <br>
     <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
     <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-    <img style="display:none;width: 70%;" id="largeImage" src="" />
+    <img style="display:none;width: 40%;" id="largeImage" src="" />
     <hr>
     <!-- MultipleImageSelectionPlugin -->
     <button onclick="MultipleImageSelection();">MultipleImageSelection Android</button><br>
+    <div id="downloadedImageDiv" style="border-color: black; border-width: 1px; padding: 10px; background-color: rgb(211, 225, 241); text-align: start; min-height: 200px;">
+    </div>
+    
+    
+    
   </body>
 </html>
