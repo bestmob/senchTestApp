@@ -58,7 +58,18 @@
     function onFail(message) {
       alert('Failed because: ' + message);
     }
-
+    // ----------------------------------
+    // MultipleImageSelection
+    function MultipleImageSelection() {
+      cordova.plugins.MultipleImageSelectionPlugin.select([""], function j(k) {
+        console.log("multiple image selection >>>>>");
+        console.log(k);
+        alert(JSON.stringify(k));
+      }, function e() {
+        console.log("fail");
+        onFail();
+      })
+    }
     </script>
   </head>
   <body>
@@ -68,5 +79,8 @@
     <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
     <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
     <img style="display:none;width: 70%;" id="largeImage" src="" />
+    <hr>
+    <!-- MultipleImageSelectionPlugin -->
+    <button onclick="MultipleImageSelection();">MultipleImageSelection Android</button><br>
   </body>
 </html>

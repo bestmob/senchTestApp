@@ -14,6 +14,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^9.0.0",
+    "cordova-plugin-MultipleImageSelection": "git+https://github.com/bestmob/cordova-plugin-MultipleImageSelection.git",
     "cordova-plugin-camera": "^5.0.1",
     "cordova-plugin-customCamera": "git+https://github.com/bestmob/cordova-plugin-customCamera.git",
     "cordova-plugin-device": "^2.0.3",
@@ -22,14 +23,14 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
+      "cordova-plugin-device": {},
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      },
-      "cordova-plugin-device": {},
-      "cordova-plugin-customCamera": {}
+      }
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
+  },
+  "dependencies": {
+    "jetifier": "^1.6.6"
   }
 }
