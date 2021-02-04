@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "814632760316",
+    "project_id": "buildshop-162809",
+    "storage_bucket": "buildshop-162809.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814632760316:android:f9f52dbd950cd8288ff879",
+        "android_client_info": {
+          "package_name": "com.buildshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814632760316-5n44dfgmjlj2uk8bvpuj8jvjfo9krncm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5VSe8iupydxJBr_CY6rmf_4E90nAf21M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814632760316-5n44dfgmjlj2uk8bvpuj8jvjfo9krncm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

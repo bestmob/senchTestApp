@@ -62,9 +62,9 @@
       alert('Failed because: ' + message);
     }
     // ----------------------------------
-    // MultipleImageSelection
+    // MultipleImageSelection Android
     function MultipleImageSelection() {
-      cordova.plugins.MultipleImageSelectionPlugin.select([""], function j(k) {
+      cordova.plugins.MultipleImageSelectionPlugin.select([""], function (k) {
         console.log("multiple image selection >>>>>");
         $('#downloadedImageDiv').empty();
         for (var e = 0; e < k.length; e++) {
@@ -83,6 +83,111 @@
         onFail('fail');
       })
     }
+    // MultipleImageSelection iOS
+    /*
+    function getMultiplePictures1() {
+      navigator.customCamera.getMultiplePictures(function (k) {
+        console.log("multiple image selection >>>>>");
+        $('#downloadedImageDiv').empty();
+        for (var e = 0; e < k.length; e++) {
+          var imageData = "data:image/jpeg;base64," + k[e];
+          var img = $('<img />', { 
+            src: imageData,
+            alt: 'Lamp',
+            width: 70,
+            height: 70,
+            style: 'background-color: rgb(179, 179, 179); margin-bottom: 6px; width: 70px; height:70px; margin-right: 6px;',
+          });
+          img.appendTo($('#downloadedImageDiv'));
+        }
+      }, function e() {
+        console.log("fail");
+        onFail('fail');
+      })
+    } */
+    // MultipleImageSelection iOS
+    function getMultiplePictures() {
+      plugins.imagePicker.getPictures(function(k) {
+        $('#downloadedImageDiv').empty();
+        for (var i = 0; i < k.length; i++) {
+          var imageData = k[i];
+          var img = $('<img />', { 
+            src: imageData,
+            alt: 'Lamp',
+            width: 70,
+            height: 70,
+            style: 'background-color: rgb(179, 179, 179); margin-bottom: 6px; width: 70px; height:70px; margin-right: 6px;',
+          });
+          img.appendTo($('#downloadedImageDiv'));
+        }
+      }, function (error) {
+        console.log('Error: ' + error);
+      }, {
+        maximumImagesCount: 10,
+        width: 800
+      });
+    }
+    // ----------------------------------
+    // aviaryImageAnnotation reopenImage
+    function reopenImage() {
+      var aviaryImage = document.getElementById('aviaryImage');
+      aviaryImage.style.border='solid blue';
+      var imageName = "aviary-logo1";
+      
+      navigator.camera.getPicture(function onPhotoURISuccess(downloadImageUrl) {
+        var aviaryImage = document.getElementById('aviaryImage');
+        aviaryImage.src = downloadImageUrl;
+        
+        cordova.plugins.aviaryImageAnnotation.reopenImage([downloadImageUrl, imageName], function success(val) {
+          console.log("aviaryImageAnnotation reopenImage >>>>>");
+          console.log(val);
+          if (val !== "Cancel") {
+            downloadImageUrl = val;
+            aviaryImage.src = downloadImageUrl;
+            aviaryImage.style.border='solid red';
+          }
+        }, function fail() {
+          console.log("fail")
+        })
+      }, function onFail(message) {
+        console.log('Failed because: ' + message);
+      }, {
+        quality: 30,
+        targetWidth: 600,
+        targetHeight: 600,
+        destinationType: destinationType.FILE_URI
+      });
+    }
+    // aviaryImageAnnotation reopenImage
+    function openImage() {
+      var aviaryImage = document.getElementById('aviaryImage');
+      aviaryImage.style.border='solid green';
+      var imageName = "aviary-logo2";
+      
+      navigator.camera.getPicture(function onPhotoURISuccess(imageURI) {
+        var aviaryImage = document.getElementById('aviaryImage');
+        aviaryImage.src = imageURI;
+        
+        cordova.plugins.aviaryImageAnnotation.open([imageURI, imageName], function success(val) {
+          console.log("aviaryImageAnnotation openImage >>>>>");
+          console.log(val);
+          if (val.length > 0 && val !== "Cancel") {
+            imageURI = val[1];
+            aviaryImage.src = imageURI;
+            aviaryImage.style.border='solid yellow';
+          }
+        }, function fail() {
+          console.log("fail")
+        })
+      }, function onFail(message) {
+        console.log('Failed because: ' + message);
+      }, {
+        quality: 30,
+        targetWidth: 600,
+        targetHeight: 600,
+        destinationType: destinationType.FILE_URI
+      });
+    }
     </script>
   </head>
   <body>
@@ -95,10 +200,13 @@
     <hr>
     <!-- MultipleImageSelectionPlugin -->
     <button onclick="MultipleImageSelection();">MultipleImageSelection Android</button><br>
+    <button onclick="getMultiplePictures();">MultipleImageSelection iOS</button><br>
     <div id="downloadedImageDiv" style="border-color: black; border-width: 1px; padding: 10px; background-color: rgb(211, 225, 241); text-align: start; min-height: 200px;">
     </div>
-    
-    
-    
+    <hr>
+    <!-- aviaryImageAnnotation -->
+    <button onclick="reopenImage();">aviaryImageAnnotation reopenImage</button><br>
+    <img style="width:60px;height:60px;border:1px solid;" id="aviaryImage" src="images/logo.png" /><br>
+    <button onclick="openImage();">aviaryImageAnnotation openImage</button><br>
   </body>
 </html>
