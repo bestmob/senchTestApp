@@ -15,7 +15,7 @@
   "devDependencies": {
     "cordova-android": "^9.0.0",
     "cordova-plugin-MultipleImageSelection": "git+https://github.com/bestmob/cordova-plugin-MultipleImageSelection.git",
-    "cordova-plugin-aviaryImageAnnotation": "file:../cordova-plugin-aviaryImageAnnotation",
+    "cordova-plugin-aviaryImageAnnotation": "git+https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git",
     "cordova-plugin-camera": "^5.0.1",
     "cordova-plugin-customCamera": "git+https://github.com/bestmob/cordova-plugin-customCamera.git",
     "cordova-plugin-device": "^2.0.3",
@@ -29,8 +29,8 @@
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "cordova-plugin-aviaryImageAnnotation": {},
-      "cordova-plugin-imagepicker": {}
+      "cordova-plugin-imagepicker": {},
+      "cordova-plugin-aviaryImageAnnotation": {}
     },
     "platforms": []
   },

@@ -59,6 +59,7 @@ Installation
 
     cordova plugin add cordova-plugin-imagepicker
 
+    cordova plugin add https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git
 
 
 Uninstall
@@ -69,6 +70,7 @@ Uninstall
 
     cordova plugin rm cordova-plugin-image-picker
 
+    cordova plugin rm cordova-plugin-aviaryImageAnnotation
 
 
 Reference
