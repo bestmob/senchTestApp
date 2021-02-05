@@ -96,5 +96,7 @@ Uninstall
 
 Reference
 
+    https://github.com/CreativeSDK/ios-getting-started-samples/blob/master/Framework%20Dependencies/Guide/Guide.md#core
+
     https://github.com/jeduan/cordova-plugin-imagepicker
     https://github.com/gearit/RadaeePDF-Cordova.git
