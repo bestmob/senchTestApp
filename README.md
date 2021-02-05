@@ -58,7 +58,9 @@ Installation
     cordova plugin add cordova-plugin-splashscreen
 
     cordova plugin add cordova-plugin-device
- 
+
+    cordova plugin add cordova-plugin-camera
+
     ------------------------
 
     cordova plugin add https://github.com/bestmob/cordova-plugin-customCamera.git
@@ -74,9 +76,11 @@ Installation
 
 Uninstall
 
-    cordova plugin add cordova-plugin-splashscreen
+    cordova plugin rm cordova-plugin-splashscreen
     
-    cordova plugin add cordova-plugin-device
+    cordova plugin rm cordova-plugin-device
+    
+    cordova plugin rm cordova-plugin-camera
 
     ------------------------
 
