@@ -21,6 +21,7 @@
     "cordova-plugin-customCamera": "git+https://github.com/bestmob/cordova-plugin-customCamera.git",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-multiplePhotos": "git+https://github.com/bestmob/cordova-plugin-multiplePhotos.git",
+    "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-whitelist": "^1.3.4"
   },
   "cordova": {
@@ -32,7 +33,8 @@
       "com.radaee.cordova": {},
       "cordova-plugin-aviaryImageAnnotation": {},
       "cordova-plugin-device": {},
-      "cordova-plugin-multiplePhotos": {}
+      "cordova-plugin-multiplePhotos": {},
+      "cordova-plugin-splashscreen": {}
     },
     "platforms": []
   },
