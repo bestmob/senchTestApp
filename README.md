@@ -11,11 +11,11 @@ Before install
       //implementation "com.android.support:support-fragment:26.1.0"
       implementation "com.adobe.creativesdk.foundation:auth:0.9.1251"
       implementation "com.adobe.creativesdk:image:4.8.4"
-      
       repositories {
-          maven { url 'https://maven.localytics.com/public' }
+        maven { url 'https://maven.localytics.com/public' }
       }
       implementation "com.localytics.android:library:4.0.1"
+
       implementation "com.android.support:multidex:1.0.1"
       //implementation "com.android.support:support-v4:27.+"
       implementation "com.android.support:support-v4:25.3.1"
@@ -94,8 +94,8 @@ Uninstall
 
     cordova plugin rm com.radaee.cordova
 
-Reference
 
+Reference
     https://github.com/CreativeSDK/ios-getting-started-samples/blob/master/Framework%20Dependencies/Guide/Guide.md#core
 
     https://github.com/jeduan/cordova-plugin-imagepicker
