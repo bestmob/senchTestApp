@@ -64,7 +64,27 @@
     // ----------------------------------
     // MultipleImageSelection Android
     function MultipleImageSelection() {
-      cordova.plugins.MultipleImageSelectionPlugin.select([""], function (k) {
+      cordova.plugins.MultipleImageSelectionPlugin.select([""], function success(k) {
+        console.log("multiple image selection >>>>>");
+        $('#downloadedImageDiv').empty();
+        for (var e = 0; e < k.length; e++) {
+          var imageData = "data:image/jpeg;base64," + k[e];
+          var img = $('<img />', { 
+            src: imageData,
+            alt: 'Lamp',
+            width: 70,
+            height: 70,
+            style: 'background-color: rgb(179, 179, 179); margin-bottom: 6px; width: 70px; height:70px; margin-right: 6px;',
+          });
+          img.appendTo($('#downloadedImageDiv'));
+        }
+      }, function e() {
+        console.log("fail");
+      })
+    }
+    // MultipleImageSelection iOS
+    function getMultiplePictures() {
+      cordova.plugins.multiplePhotos.getMultiplePictures(function (k) {
         console.log("multiple image selection >>>>>");
         $('#downloadedImageDiv').empty();
         for (var e = 0; e < k.length; e++) {
@@ -84,29 +104,7 @@
       })
     }
     // MultipleImageSelection iOS
-    /*
-    function getMultiplePictures1() {
-      navigator.customCamera.getMultiplePictures(function (k) {
-        console.log("multiple image selection >>>>>");
-        $('#downloadedImageDiv').empty();
-        for (var e = 0; e < k.length; e++) {
-          var imageData = "data:image/jpeg;base64," + k[e];
-          var img = $('<img />', { 
-            src: imageData,
-            alt: 'Lamp',
-            width: 70,
-            height: 70,
-            style: 'background-color: rgb(179, 179, 179); margin-bottom: 6px; width: 70px; height:70px; margin-right: 6px;',
-          });
-          img.appendTo($('#downloadedImageDiv'));
-        }
-      }, function e() {
-        console.log("fail");
-        onFail('fail');
-      })
-    } */
-    // MultipleImageSelection iOS
-    function getMultiplePictures() {
+    /*function getMultiplePictures2() {
       plugins.imagePicker.getPictures(function(k) {
         $('#downloadedImageDiv').empty();
         for (var i = 0; i < k.length; i++) {
@@ -126,7 +124,7 @@
         maximumImagesCount: 10,
         width: 800
       });
-    }
+    }*/
     // ----------------------------------
     // aviaryImageAnnotation reopenImage
     function reopenImage() {
@@ -143,7 +141,7 @@
           console.log(val);
           if (val !== "Cancel") {
             downloadImageUrl = val;
-            aviaryImage.src = downloadImageUrl;
+            aviaryImage.src = val[1];
             aviaryImage.style.border='solid red';
           }
         }, function fail() {
@@ -188,6 +186,64 @@
         destinationType: destinationType.FILE_URI
       });
     }
+    // ----------------------------------
+    // RadaeePDF-Cordova Plugin
+    function radaeePDFActivateLicense() {
+      var devicePlatform = device.platform;
+      console.log("devicePlatform", devicePlatform);
+      if( devicePlatform == "Android") {
+        var key = "ZFBL4M-BDUKTJ-3I9WZQ-ROH2PD-W8AMMA-56BA1C";
+      } else {
+        var key = "RCZ5DQ-U222G6-3I9WZQ-ROH2PD-W8AMMA-56BA1C";
+      }
+      RadaeePDFPlugin.activateLicense({
+        licenseType: 1, //0: for standard license, 1: for professional license, 2: for premium license
+        company: "Buildshop", //the company name you entered during license activation
+        email: "shawn.pace@buildshop.com", //the email you entered during license activation
+        key: key //you license activation key
+      },
+      function(message) { // Callback for successful opening.
+         console.log("activateLicense Success: " + message);
+      },
+      function(err){ // Callback in case of error.
+        console.log("Failure: " + err);
+      });
+    }
+    function radaeePDFOpen() {
+      var url = "https://www.radaeepdf.com/documentation/MRBrochoure.pdf";
+      var devicePlatform = device.platform;
+      console.log("devicePlatform", devicePlatform);
+      if( devicePlatform == "iOS") {
+        RadaeePDFPlugin.open(
+        {
+          url: url, //The path of the pdf to open
+          name: "name.pdf",
+          isEdit: true
+        },
+        function(p) {
+          console.log("Success: PDFbase64Binary base64Url >>>");
+          console.log(p);
+          var base64Url = p;
+        },
+        function(err){
+          console.log("Failure: " + err);
+        });
+      } else {
+        RadaeePDFPlugin.open(
+        {
+          url: url, //The path of the pdf to open
+          name: "name.pdf",
+        },
+        function(p) {
+          console.log("Success: PDFbase64Binary base64Url >>>");
+          console.log(p);
+          var base64Url = p[0];
+        },
+        function(err){
+          console.log("Failure: " + err);
+        });
+      }
+    }
     </script>
   </head>
   <body>
@@ -208,5 +264,9 @@
     <button onclick="reopenImage();">aviaryImageAnnotation reopenImage</button><br>
     <img style="width:60px;height:60px;border:1px solid;" id="aviaryImage" src="images/logo.png" /><br>
     <button onclick="openImage();">aviaryImageAnnotation openImage</button><br>
+    <hr>
+    <!-- RadaeePDF-Cordova Plugin -->
+    <button onclick="radaeePDFActivateLicense();">RadaeePDFPlugin activateLicense</button><br>
+    <button onclick="radaeePDFOpen();">RadaeePDFPlugin Open</button><br>
   </body>
 </html>

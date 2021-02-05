@@ -4,10 +4,8 @@ Before install
       (App\platforms\android\app\build.gradle   in line 356)
   ```
     dependencies {
-      //implementation "com.android.support:support-v4:27.+"
-      //implementation 'com.android.support:support-v4:25.3.1'
       implementation ("com.github.bumptech.glide:glide:3.8.0") {
-        exclude group: "com.android.support"
+        //exclude group: "com.android.support"
       }
       //implementation 'com.android.support:appcompat-v7:28.0.0'
       //implementation "com.android.support:support-fragment:26.1.0"
@@ -18,6 +16,9 @@ Before install
           maven { url 'https://maven.localytics.com/public' }
       }
       implementation "com.localytics.android:library:4.0.1"
+      implementation "com.android.support:multidex:1.0.1"
+      //implementation "com.android.support:support-v4:27.+"
+      implementation "com.android.support:support-v4:25.3.1"
     }
   ```
 
@@ -26,6 +27,7 @@ Before install
   ```
     android {
       defaultConfig {
+        multiDexEnabled true
         manifestPlaceholders = [appPackageName: "e9ef8e6f6f764b27b6fd89087cf66c45"]
       }
     }
@@ -43,8 +45,8 @@ library-4.0.1.pom
 
 - platforms\android\project.properties
 remove com.android.support:support-v4:27.+
-#cordova.system.library.1=com.android.support:support-v4:27.+
-
+`#cordova.system.library.1=com.android.support:support-v4:27.+
+`
 
 - src\main\AndroidManifest.xml, update manifest and supports-screens, insert following 
 ```
@@ -53,26 +55,42 @@ remove com.android.support:support-v4:27.+
 ```
 Installation
 
+    cordova plugin add cordova-plugin-splashscreen
+
+    cordova plugin add cordova-plugin-device
+ 
+    ------------------------
+
     cordova plugin add https://github.com/bestmob/cordova-plugin-customCamera.git
-    
+
     cordova plugin add https://github.com/bestmob/cordova-plugin-MultipleImageSelection.git
 
-    cordova plugin add cordova-plugin-imagepicker
+    cordova plugin add https://github.com/bestmob/cordova-plugin-multiplePhotos.git
 
-    cordova plugin add https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git
+    cordova plugin add https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git --force
+
+    cordova plugin add https://github.com/gearit/RadaeePDF-Cordova.git
 
 
 Uninstall
+
+    cordova plugin add cordova-plugin-splashscreen
+    
+    cordova plugin add cordova-plugin-device
+
+    ------------------------
 
     cordova plugin rm cordova-plugin-customCamera
 
     cordova plugin rm cordova-plugin-MultipleImageSelection
 
-    cordova plugin rm cordova-plugin-image-picker
+    cordova plugin rm cordova-plugin-multiplePhotos
 
     cordova plugin rm cordova-plugin-aviaryImageAnnotation
 
+    cordova plugin rm com.radaee.cordova
 
 Reference
 
     https://github.com/jeduan/cordova-plugin-imagepicker
+    https://github.com/gearit/RadaeePDF-Cordova.git
