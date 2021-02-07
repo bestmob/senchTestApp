@@ -1,4 +1,8 @@
-Before install
+### Description
+
+Top Notch Display Issue, Push Notification, PDF annotation , image plug in for image annotation and multi select function off images
+
+### Before install
 
 - update build.gradle file and sync (File/Sync Project with Gradle Files)
       (App\platforms\android\app\build.gradle   in line 356)
@@ -9,16 +13,17 @@ Before install
       }
       //implementation 'com.android.support:appcompat-v7:28.0.0'
       //implementation "com.android.support:support-fragment:26.1.0"
-      implementation "com.adobe.creativesdk.foundation:auth:0.9.1251"
-      implementation "com.adobe.creativesdk:image:4.8.4"
-      repositories {
-        maven { url 'https://maven.localytics.com/public' }
-      }
-      implementation "com.localytics.android:library:4.0.1"
+      
+      //implementation "com.adobe.creativesdk.foundation:auth:0.9.1251"
+      //implementation "com.adobe.creativesdk:image:4.8.4"
+      //repositories {
+      //  maven { url 'https://maven.localytics.com/public' }
+      //}
+      //implementation "com.localytics.android:library:4.0.1"
 
       implementation "com.android.support:multidex:1.0.1"
       //implementation "com.android.support:support-v4:27.+"
-      implementation "com.android.support:support-v4:25.3.1"
+      //implementation "com.android.support:support-v4:25.3.1"
     }
   ```
 
@@ -53,7 +58,18 @@ remove com.android.support:support-v4:27.+
  <manifest xmlns:tools="http://schemas.android.com/tools" >
  <supports-screens tools:replace="android:smallScreens" >
 ```
-Installation
+
+- src\main\AndroidManifest.xml, make sure CustomCameraActivity is added into manifest
+```
+<application  ...>
+
+  <activity android:configChanges="orientation" android:hardwareAccelerated="true" android:name="com.best.cordova.plugins.camera.CustomCameraActivity" android:screenOrientation="portrait" />
+  
+  <activity android:configChanges="orientation|keyboardHidden|screenSize" android:name="com.best.cordova.plugins.MultipleImageSelection.MultipleSelectionActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar" />
+</application>
+```
+
+### Installation
 
     cordova plugin add cordova-plugin-splashscreen
 
@@ -73,8 +89,11 @@ Installation
 
     cordova plugin add https://github.com/gearit/RadaeePDF-Cordova.git
 
+    ------------------------
 
-Uninstall
+    cordova build android
+
+### Uninstall
 
     cordova plugin rm cordova-plugin-splashscreen
     
@@ -95,7 +114,8 @@ Uninstall
     cordova plugin rm com.radaee.cordova
 
 
-Reference
+### Reference
+
     https://github.com/CreativeSDK/ios-getting-started-samples/blob/master/Framework%20Dependencies/Guide/Guide.md#core
 
     https://github.com/jeduan/cordova-plugin-imagepicker

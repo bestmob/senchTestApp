@@ -27,13 +27,13 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-multiplePhotos": {},
+      "com.radaee.cordova": {},
+      "cordova-plugin-device": {},
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "com.radaee.cordova": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-multiplePhotos": {},
-      "cordova-plugin-splashscreen": {},
       "cordova-plugin-aviaryImageAnnotation": {}
     },
     "platforms": []

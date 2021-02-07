@@ -78,8 +78,8 @@
           });
           img.appendTo($('#downloadedImageDiv'));
         }
-      }, function e() {
-        console.log("fail");
+      }, function e(message) {
+        console.log("fail>>>", message);
       })
     }
     // MultipleImageSelection iOS
