@@ -29,7 +29,8 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
 
     cordova plugin add https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git
 
-    # cordova plugin add https://github.com/transistorsoft/cordova-background-geolocation-lt.git
+    # cordova plugin add https://github.com/snowhow/cordova-plugin-gpstrack.git
+
 
     ------------------------
 
@@ -57,7 +58,7 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
     cordova plugin rm cordova-plugin-MultipleImageSelection
     cordova plugin rm cordova-plugin-multiplePhotos
     cordova plugin rm cordova-plugin-aviaryImageAnnotation
-    # cordova plugin rm cordova-background-geolocation-lt
+    # cordova plugin rm info.snowhow.plugin.gpstrack
 
 ### Android Setup
 
@@ -142,16 +143,19 @@ This is for cordova-plugin-aviaryImageAnnotation, if it's duplicated, remove it.
 ### iOS Setup
 
 #### install cordova-plugin-aviaryImageAnnotation plugin
+
 extract src/ios/AdobeCreativeSDKFrameworks.zip.
 
 cordova platform add ios
+
 cordova build ios
 
 - AdobeCreativeSDKCore configuration 
+
   // Add -ObjC as a linker flag in Build Settings/Linking/Other Linker Flags.
   
   ?? In Build Settings, Apple LLVM - Preprocessing, add USE_CSDK_COMPONENTS to the Preprocessor Macros.
-  
+
   1. In General, Frameworks, Libraries, and Embedded Content
     AdobeCreativeSDKCore.framework    changed to Embed & Sign
     AdobeCreativeSDKImage.framework    changed to Embed & Sign
