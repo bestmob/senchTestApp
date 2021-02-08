@@ -244,6 +244,71 @@
         });
       }
     }
+    // ----------------------------------
+    // Push Notification Cordova Plugin
+    function initPush() {
+      const push = PushNotification.init({
+        android: {
+          senderID: "814632760316",
+          sound: true,
+          vibrate: true,
+          alert: true
+        },
+        ios: {
+          senderID: "814632760316",
+          alert: 'true',
+          badge: true,
+          sound: 'true'
+        }
+      });
+      push.on('registration', data => {
+        console.log("DeviceTokenId >>>>>", data.registrationId);
+        console.log(data.registrationType);
+        if ( data.registrationId.length > 0 ) {
+					var DeviceTokenId = data.registrationId;
+        }
+      });
+      push.on('notification', data => {
+        console.log('notification>>>>');
+        console.log(data.message);
+        console.log(data.title);
+        console.log(data.count);
+        console.log(data.sound);
+        console.log(data.image);
+        console.log(data.additionalData);
+        alert(data.message);
+      });
+      push.on('error', function(e) {
+        console.log(e.message);
+      });
+    }
+    // ----------------------------------
+    // geolocation Cordova Plugin
+    function getUserLocation() {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        alert('Latitude: '  + position.coords.latitude  + '\n' +
+          'Longitude: '     + position.coords.longitude + '\n' +
+          'Altitude: '      + position.coords.altitude  + '\n' +
+          'Accuracy: '          + position.coords.accuracy          + '\n' +
+          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+          'Heading: '           + position.coords.heading           + '\n' +
+          'Speed: '             + position.coords.speed             + '\n' +
+          'Timestamp: '         + position.timestamp                + '\n');
+      }, function(error) {
+        alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+      }, {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 10000
+      })
+    }
+    // ----------------------------------
+    // socialShare Cordova Plugin
+    function socialShare() {
+      var imageUrl = 'https://www.google.nl/images/srpr/logo4w.png';
+      window.plugins.socialsharing.share(null, null, imageUrl, null);
+    }
     </script>
   </head>
   <body>
@@ -268,5 +333,15 @@
     <!-- RadaeePDF-Cordova Plugin -->
     <button onclick="radaeePDFActivateLicense();">RadaeePDFPlugin activateLicense</button><br>
     <button onclick="radaeePDFOpen();">RadaeePDFPlugin Open</button><br>
+    <hr>
+    <!-- Push Cordova Plugin -->
+    <button onclick="initPush();">pushNotification init</button><br>
+    <hr>
+    <!-- geolocation Cordova Plugin -->
+    <button onclick="getUserLocation();">getUserLocation</button><br>
+    <hr>
+    <!-- socialsharing Cordova Plugin -->
+    <button onclick="socialShare();">socialShare</button><br>
+    <hr>
   </body>
 </html>

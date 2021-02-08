@@ -21,14 +21,20 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
       //}
       //implementation "com.localytics.android:library:4.0.1"
 
-      implementation "com.android.support:multidex:1.0.1"
+      //implementation "com.android.support:multidex:1.0.1"
       //implementation "com.android.support:support-v4:27.+"
       //implementation "com.android.support:support-v4:25.3.1"
     }
   ```
+  \platforms\android\com.radaee.cordova\buildshop-build-extras.gradle
+  It has
+    api 'com.android.support:support-v4:26.1.0'
+    api 'com.android.support:multidex:1.0.1'
+  so don't need to add support-v4, multidex in the other gradle config.
+  If there is duplicated support-v4, remove one.
 
 - update build.gradle file and sync (File/Sync Project with Gradle Files)
-      (App\platforms\android\app\build.gradle   in line 249)
+      (App\platforms\android\app\build.gradle in line 252)
   ```
     android {
       defaultConfig {
@@ -49,9 +55,10 @@ library-4.0.1.pom
   ```
 
 - platforms\android\project.properties
-remove com.android.support:support-v4:27.+
-`#cordova.system.library.1=com.android.support:support-v4:27.+
-`
+remove com.android.support:support
+`#cordova.system.library.1=com.android.support:support-v4:27.+`
+`#cordova.system.library.2=com.android.support:support-v13:28.0.0`
+`#cordova.system.library.2=com.android.support:appcompat-v7:28.+`
 
 - src\main\AndroidManifest.xml, update manifest and supports-screens, insert following 
 ```
@@ -59,7 +66,7 @@ remove com.android.support:support-v4:27.+
  <supports-screens tools:replace="android:smallScreens" >
 ```
 
-- src\main\AndroidManifest.xml, make sure CustomCameraActivity is added into manifest
+- src\main\AndroidManifest.xml, make sure CustomCameraActivity, MultipleSelectionActivity is added into manifest
 ```
 <application  ...>
 
@@ -69,13 +76,28 @@ remove com.android.support:support-v4:27.+
 </application>
 ```
 
+- src\main\AndroidManifest.xml, add ApplicationMainClass into android:name  under application tag
+```
+<application android:name="com.best.cordova.plugins.ImageAnnotation.ApplicationMainClass" />
+```
+This is for cordova-plugin-aviaryImageAnnotation, if it's duplicated, remove it.
+
 ### Installation
 
     cordova plugin add cordova-plugin-splashscreen
-
+    cordova plugin add cordova-plugin-statusbar
     cordova plugin add cordova-plugin-device
-
     cordova plugin add cordova-plugin-camera
+    cordova plugin add cordova-plugin-network-information
+    cordova plugin add cordova-plugin-inappbrowser
+    cordova plugin add cordova-plugin-ionic-webview
+    cordova plugin add cordova-plugin-geolocation
+    cordova plugin add https://github.com/gearit/RadaeePDF-Cordova.git
+    cordova plugin add @havesource/cordova-plugin-push
+    cordova plugin add cordova-plugin-x-socialsharing@5.0.12
+    
+    # cordova plugin add cordova-plugin-androidx
+    # cordova plugin add cordova-plugin-androidx-adapter
 
     ------------------------
 
@@ -85,9 +107,9 @@ remove com.android.support:support-v4:27.+
 
     cordova plugin add https://github.com/bestmob/cordova-plugin-multiplePhotos.git
 
-    cordova plugin add https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git --force
+    cordova plugin add https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git
 
-    cordova plugin add https://github.com/gearit/RadaeePDF-Cordova.git
+    cordova plugin add https://github.com/transistorsoft/cordova-background-geolocation-lt.git
 
     ------------------------
 
@@ -96,27 +118,28 @@ remove com.android.support:support-v4:27.+
 ### Uninstall
 
     cordova plugin rm cordova-plugin-splashscreen
-    
     cordova plugin rm cordova-plugin-device
-    
     cordova plugin rm cordova-plugin-camera
-
+    cordova plugin rm cordova-plugin-network-information
+    cordova plugin rm cordova-plugin-inappbrowser
+    cordova plugin rm cordova-plugin-ionic-webview
+    cordova plugin rm cordova-plugin-geolocation
+    cordova plugin rm com.radaee.cordova
+    cordova plugin rm havesource-cordova-plugin-push
+    cordova plugin rm cordova-plugin-x-socialsharing
+    
+    # cordova plugin rm cordova-plugin-androidx
+    # cordova plugin rm cordova-plugin-androidx-adapter
+    
     ------------------------
 
     cordova plugin rm cordova-plugin-customCamera
-
     cordova plugin rm cordova-plugin-MultipleImageSelection
-
     cordova plugin rm cordova-plugin-multiplePhotos
-
     cordova plugin rm cordova-plugin-aviaryImageAnnotation
-
-    cordova plugin rm com.radaee.cordova
-
+    cordova plugin rm cordova-background-geolocation-lt
 
 ### Reference
-
     https://github.com/CreativeSDK/ios-getting-started-samples/blob/master/Framework%20Dependencies/Guide/Guide.md#core
-
     https://github.com/jeduan/cordova-plugin-imagepicker
     https://github.com/gearit/RadaeePDF-Cordova.git
