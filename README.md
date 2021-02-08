@@ -2,7 +2,64 @@
 
 Top Notch Display Issue, Push Notification, PDF annotation , image plug in for image annotation and multi select function off images
 
-### Before install
+### Installation
+
+    cordova plugin add cordova-plugin-splashscreen
+    cordova plugin add cordova-plugin-statusbar
+    cordova plugin add cordova-plugin-device
+    cordova plugin add cordova-plugin-camera
+    cordova plugin add cordova-plugin-network-information
+    cordova plugin add cordova-plugin-inappbrowser
+    # cordova plugin add cordova-plugin-ionic-webview
+    cordova plugin add cordova-plugin-geolocation
+    cordova plugin add https://github.com/gearit/RadaeePDF-Cordova.git
+    cordova plugin add @havesource/cordova-plugin-push
+    cordova plugin add cordova-plugin-x-socialsharing@5.0.12
+    
+    # cordova plugin add cordova-plugin-androidx
+    # cordova plugin add cordova-plugin-androidx-adapter
+
+    ------------------------
+
+    cordova plugin add https://github.com/bestmob/cordova-plugin-customCamera.git
+
+    cordova plugin add https://github.com/bestmob/cordova-plugin-MultipleImageSelection.git
+
+    cordova plugin add https://github.com/bestmob/cordova-plugin-multiplePhotos.git
+
+    cordova plugin add https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git
+
+    # cordova plugin add https://github.com/transistorsoft/cordova-background-geolocation-lt.git
+
+    ------------------------
+
+    cordova build android
+
+### Uninstall
+
+    cordova plugin rm cordova-plugin-splashscreen
+    cordova plugin rm cordova-plugin-device
+    cordova plugin rm cordova-plugin-camera
+    cordova plugin rm cordova-plugin-network-information
+    cordova plugin rm cordova-plugin-inappbrowser
+    # cordova plugin rm cordova-plugin-ionic-webview
+    cordova plugin rm cordova-plugin-geolocation
+    cordova plugin rm com.radaee.cordova
+    cordova plugin rm havesource-cordova-plugin-push
+    cordova plugin rm cordova-plugin-x-socialsharing
+    
+    # cordova plugin rm cordova-plugin-androidx
+    # cordova plugin rm cordova-plugin-androidx-adapter
+    
+    ------------------------
+
+    cordova plugin rm cordova-plugin-customCamera
+    cordova plugin rm cordova-plugin-MultipleImageSelection
+    cordova plugin rm cordova-plugin-multiplePhotos
+    cordova plugin rm cordova-plugin-aviaryImageAnnotation
+    # cordova plugin rm cordova-background-geolocation-lt
+
+### Android Setup
 
 - update build.gradle file and sync (File/Sync Project with Gradle Files)
       (App\platforms\android\app\build.gradle   in line 356)
@@ -82,62 +139,25 @@ remove com.android.support:support
 ```
 This is for cordova-plugin-aviaryImageAnnotation, if it's duplicated, remove it.
 
-### Installation
+### iOS Setup
 
-    cordova plugin add cordova-plugin-splashscreen
-    cordova plugin add cordova-plugin-statusbar
-    cordova plugin add cordova-plugin-device
-    cordova plugin add cordova-plugin-camera
-    cordova plugin add cordova-plugin-network-information
-    cordova plugin add cordova-plugin-inappbrowser
-    cordova plugin add cordova-plugin-ionic-webview
-    cordova plugin add cordova-plugin-geolocation
-    cordova plugin add https://github.com/gearit/RadaeePDF-Cordova.git
-    cordova plugin add @havesource/cordova-plugin-push
-    cordova plugin add cordova-plugin-x-socialsharing@5.0.12
+#### install cordova-plugin-aviaryImageAnnotation plugin
+extract src/ios/AdobeCreativeSDKFrameworks.zip.
+
+cordova platform add ios
+cordova build ios
+
+- AdobeCreativeSDKCore configuration 
+  // Add -ObjC as a linker flag in Build Settings/Linking/Other Linker Flags.
+  
+  ?? In Build Settings, Apple LLVM - Preprocessing, add USE_CSDK_COMPONENTS to the Preprocessor Macros.
+  
+  1. In General, Frameworks, Libraries, and Embedded Content
+    AdobeCreativeSDKCore.framework    changed to Embed & Sign
+    AdobeCreativeSDKImage.framework    changed to Embed & Sign
     
-    # cordova plugin add cordova-plugin-androidx
-    # cordova plugin add cordova-plugin-androidx-adapter
 
-    ------------------------
-
-    cordova plugin add https://github.com/bestmob/cordova-plugin-customCamera.git
-
-    cordova plugin add https://github.com/bestmob/cordova-plugin-MultipleImageSelection.git
-
-    cordova plugin add https://github.com/bestmob/cordova-plugin-multiplePhotos.git
-
-    cordova plugin add https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git
-
-    cordova plugin add https://github.com/transistorsoft/cordova-background-geolocation-lt.git
-
-    ------------------------
-
-    cordova build android
-
-### Uninstall
-
-    cordova plugin rm cordova-plugin-splashscreen
-    cordova plugin rm cordova-plugin-device
-    cordova plugin rm cordova-plugin-camera
-    cordova plugin rm cordova-plugin-network-information
-    cordova plugin rm cordova-plugin-inappbrowser
-    cordova plugin rm cordova-plugin-ionic-webview
-    cordova plugin rm cordova-plugin-geolocation
-    cordova plugin rm com.radaee.cordova
-    cordova plugin rm havesource-cordova-plugin-push
-    cordova plugin rm cordova-plugin-x-socialsharing
-    
-    # cordova plugin rm cordova-plugin-androidx
-    # cordova plugin rm cordova-plugin-androidx-adapter
-    
-    ------------------------
-
-    cordova plugin rm cordova-plugin-customCamera
-    cordova plugin rm cordova-plugin-MultipleImageSelection
-    cordova plugin rm cordova-plugin-multiplePhotos
-    cordova plugin rm cordova-plugin-aviaryImageAnnotation
-    cordova plugin rm cordova-background-geolocation-lt
+  
 
 ### Reference
     https://github.com/CreativeSDK/ios-getting-started-samples/blob/master/Framework%20Dependencies/Guide/Guide.md#core
