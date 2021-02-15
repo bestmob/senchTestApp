@@ -6,6 +6,7 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
 
     cordova plugin add cordova-plugin-splashscreen
     cordova plugin add cordova-plugin-statusbar
+    cordova plugin add cordova-plugin-webviewcolor
     cordova plugin add cordova-plugin-device
     cordova plugin add cordova-plugin-camera
     cordova plugin add cordova-plugin-network-information
@@ -35,10 +36,14 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
     ------------------------
 
     cordova build android
+    
+    cordova build ios
 
 ### Uninstall
 
     cordova plugin rm cordova-plugin-splashscreen
+    cordova plugin rm cordova-plugin-statusbar
+    cordova plugin rm cordova-plugin-webviewcolor
     cordova plugin rm cordova-plugin-device
     cordova plugin rm cordova-plugin-camera
     cordova plugin rm cordova-plugin-network-information
@@ -167,3 +172,18 @@ cordova build ios
     https://github.com/CreativeSDK/ios-getting-started-samples/blob/master/Framework%20Dependencies/Guide/Guide.md#core
     https://github.com/jeduan/cordova-plugin-imagepicker
     https://github.com/gearit/RadaeePDF-Cordova.git
+    
+- Notch Android Emulator (With P)
+
+    https://hiteshdhamshaniya-wvmagic.medium.com/notch-android-emulator-with-p-e9b3556d9d5e
+```
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    
+    function onDeviceReady() {
+      StatusBar.overlaysWebView(true);
+    }
+```
+    
+    https://stackoverflow.com/questions/46232812/cordova-app-not-displaying-correctly-on-iphone-x-simulator
+    
+    

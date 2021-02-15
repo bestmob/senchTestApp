@@ -21,6 +21,7 @@
     function onDeviceReady() {
         pictureSource=Camera.PictureSourceType;
         destinationType=Camera.DestinationType;
+        StatusBar.overlaysWebView(true);
     }
     // Called when a photo is successfully retrieved
     function onPhotoDataSuccess(imageData) {
@@ -204,13 +205,14 @@
       },
       function(message) { // Callback for successful opening.
          console.log("activateLicense Success: " + message);
+         alert("activateLicense Success: " + message);
       },
       function(err){ // Callback in case of error.
         console.log("Failure: " + err);
       });
     }
     function radaeePDFOpen() {
-      var url = "https://www.radaeepdf.com/documentation/MRBrochoure.pdf";
+      var url = "https://test.buildshop.com/Documents/2219/Sample%20Project/Client/Drawings/basement-floor-plan-1.pdf";
       var devicePlatform = device.platform;
       console.log("devicePlatform", devicePlatform);
       if( devicePlatform == "iOS") {
@@ -247,7 +249,7 @@
     // ----------------------------------
     // Push Notification Cordova Plugin
     function initPush() {
-      const push = PushNotification.init({
+      var push = PushNotification.init({
         android: {
           senderID: "814632760316",
           sound: true,
@@ -261,14 +263,14 @@
           sound: 'true'
         }
       });
-      push.on('registration', data => {
+      push.on('registration', function(data) {
         console.log("DeviceTokenId >>>>>", data.registrationId);
         console.log(data.registrationType);
         if ( data.registrationId.length > 0 ) {
 					var DeviceTokenId = data.registrationId;
         }
       });
-      push.on('notification', data => {
+      push.on('notification', function(data) {
         console.log('notification>>>>');
         console.log(data.message);
         console.log(data.title);
