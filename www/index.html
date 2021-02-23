@@ -22,6 +22,7 @@
         pictureSource=Camera.PictureSourceType;
         destinationType=Camera.DestinationType;
         StatusBar.overlaysWebView(true);
+        console.log(device.cordova);
     }
     // Called when a photo is successfully retrieved
     function onPhotoDataSuccess(imageData) {
@@ -328,6 +329,53 @@
 
         alert('Connection type: ' + states[networkState]);
     }
+    // ----------------------------------
+    // gpstrack Start
+    function gpstrackStart() {
+        var baseApiURL = 'https://test.buildshop.mobi/api/';
+        var UserDataID = 2219;
+        var UserName = "Buildshop";
+        var CompanyID = 2219;
+        var ProjectName = "3750";
+        var TimeSheetUID = "3007";
+        var g = new Date();
+        var h = new Date(g.getFullYear(), g.getMonth(), g.getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds());
+        var w = {
+          ServerDetails: [{
+            UserDataID: UserDataID,
+            latitude: 39.884634,
+            longitude: -105.138641,
+            UserName: UserName,
+            Name: UserName,
+            Status: "Start Regular Time",
+            Description: "",
+            Date: h,
+            TimeSheetStatus: "Clocked In",
+            CompanyID: CompanyID,
+            ProjectName: ProjectName,
+            TimeSheetUID: TimeSheetUID
+          }],
+          IntervalTime: 60,
+          IntervalDistance: "100",
+          ServerURL: baseApiURL + "MapTrackers"
+        };
+        //Status=Drive+Time&Description=&UserName=Alex&UserDataID=1&CompanyID=1&ProjectName=A+Project&latitude=44.418809&TimeSheetUID=00001&TimeSheetStatus=Clocked+In&Date=2021-02-23T04%3A31%3A50.000Z&longitude=26.12382&Name=Alex
+        navigator.gpstrack.start(function(x) {
+          console.log('start>>>>');
+          console.log(x)
+        }, function() {
+          
+        }, w)
+    }
+    // gpstrack Stop
+    function gpstrackStop() {
+        navigator.gpstrack.stop(function(t) {
+          console.log('stop>>>>');
+          console.log(t)
+        }, function() {
+        
+        }, [""])
+    }
     </script>
   </head>
   <body>
@@ -364,6 +412,10 @@
     <hr>
     <!-- checkConnection Cordova Plugin -->
     <button onclick="checkConnection();">checkConnection</button><br>
+    <hr>
+    <!-- gpstrackStart Cordova Plugin -->
+    <button onclick="gpstrackStart();">gpstrack start</button><br>
+    <button onclick="gpstrackStop();">gpstrack stop</button><br>
     <hr>
   </body>
 </html>

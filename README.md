@@ -4,6 +4,7 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
 
 ### Installation
 
+    cordova plugin add cordova-plugin-whitelist
     cordova plugin add cordova-plugin-splashscreen
     cordova plugin add cordova-plugin-statusbar
     cordova plugin add cordova-plugin-webviewcolor
@@ -11,11 +12,12 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
     cordova plugin add cordova-plugin-camera
     cordova plugin add cordova-plugin-network-information
     cordova plugin add cordova-plugin-inappbrowser
-    # cordova plugin add cordova-plugin-ionic-webview
+    cordova plugin add cordova-plugin-ionic-webview
+    cordova plugin add cordova-plugin-wkwebview-file-xhr
     cordova plugin add cordova-plugin-geolocation
-    cordova plugin add https://github.com/gearit/RadaeePDF-Cordova.git
     cordova plugin add @havesource/cordova-plugin-push
     cordova plugin add cordova-plugin-x-socialsharing@5.0.12
+    cordova plugin add https://github.com/gearit/RadaeePDF-Cordova.git
     
     # cordova plugin add cordova-plugin-androidx
     # cordova plugin add cordova-plugin-androidx-adapter
@@ -30,8 +32,7 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
 
     cordova plugin add https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git
 
-    # cordova plugin add https://github.com/snowhow/cordova-plugin-gpstrack.git
-
+    cordova plugin add https://github.com/bestmob/cordova-plugin-gpstrack.git
 
     ------------------------
 
@@ -41,6 +42,7 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
 
 ### Uninstall
 
+    cordova plugin rm cordova-plugin-whitelist
     cordova plugin rm cordova-plugin-splashscreen
     cordova plugin rm cordova-plugin-statusbar
     cordova plugin rm cordova-plugin-webviewcolor
@@ -48,11 +50,12 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
     cordova plugin rm cordova-plugin-camera
     cordova plugin rm cordova-plugin-network-information
     cordova plugin rm cordova-plugin-inappbrowser
-    # cordova plugin rm cordova-plugin-ionic-webview
+    cordova plugin rm cordova-plugin-ionic-webview
+    cordova plugin rm cordova-plugin-wkwebview-file-xhr
     cordova plugin rm cordova-plugin-geolocation
-    cordova plugin rm com.radaee.cordova
     cordova plugin rm havesource-cordova-plugin-push
     cordova plugin rm cordova-plugin-x-socialsharing
+    cordova plugin rm com.radaee.cordova
     
     # cordova plugin rm cordova-plugin-androidx
     # cordova plugin rm cordova-plugin-androidx-adapter
@@ -63,7 +66,7 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
     cordova plugin rm cordova-plugin-MultipleImageSelection
     cordova plugin rm cordova-plugin-multiplePhotos
     cordova plugin rm cordova-plugin-aviaryImageAnnotation
-    # cordova plugin rm info.snowhow.plugin.gpstrack
+    cordova plugin rm cordova-plugin-gpstrack
 
 ### Android Setup
 
@@ -172,6 +175,11 @@ cordova build ios
     https://github.com/CreativeSDK/ios-getting-started-samples/blob/master/Framework%20Dependencies/Guide/Guide.md#core
     https://github.com/jeduan/cordova-plugin-imagepicker
     https://github.com/gearit/RadaeePDF-Cordova.git
+    
+    \platforms\android\app\src\main\java\com\radaee\reader\PDFViewController.java
+    Line 198: This line is used to disable edit button
+      SetBtnEnabled(btn_annot, m_view.PDFCanSave());
+      LOG.d("PDFCanSave>>>>>>>>>>>>", String.valueOf(m_view.PDFCanSave()));
     
 - Notch Android Emulator (With P)
 
