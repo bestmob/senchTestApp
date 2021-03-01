@@ -16,6 +16,7 @@
     "@havesource/cordova-plugin-push": "^1.0.0",
     "cordova-android": "^9.0.0",
     "cordova-plugin-MultipleImageSelection": "file:../cordova-plugin-MultipleImageSelection",
+    "cordova-plugin-RadaeePDF": "git+https://github.com/bestmob/cordova-plugin-RadaeePDF.git",
     "cordova-plugin-android-permissions": "^1.1.2",
     "cordova-plugin-aviaryImageAnnotation": "git+https://github.com/bestmob/cordova-plugin-aviaryImageAnnotation.git",
     "cordova-plugin-camera": "^5.0.1",
@@ -23,7 +24,7 @@
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-geolocation": "^4.1.0",
-    "cordova-plugin-gpstrack": "file:../cordova-plugin-RadaeePDF",
+    "cordova-plugin-gpstrack": "git+https://github.com/bestmob/cordova-plugin-gpstrack.git",
     "cordova-plugin-inappbrowser": "^4.1.0",
     "cordova-plugin-multiplePhotos": "git+https://github.com/bestmob/cordova-plugin-multiplePhotos.git",
     "cordova-plugin-network-information": "^2.0.2",
@@ -53,10 +54,10 @@
       "cordova-plugin-aviaryImageAnnotation": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-android-permissions": {},
-      "cordova-plugin-gpstrack": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
       },
+      "cordova-plugin-gpstrack": {},
       "cordova-plugin-RadaeePDF": {}
     },
     "platforms": []
