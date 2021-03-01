@@ -1,23 +1,41 @@
+# BuildshopTest 
+BuildShop Sencha Touch Plugin Test App
+
 ### Description
 
-Top Notch Display Issue, Push Notification, PDF annotation , image plug in for image annotation and multi select function off images
+##### Todo list
+```
+Top Notch Display Issue,
+Push Notification,
+customCamera,
+PDF annotation,
+image plugin for image annotation
+multi select function of images
+```
+
+cordova-plugin-customCamera               ✓
+cordova-plugin-MultipleImageSelection     ✓
+cordova-plugin-multiplePhotos             ✓
+cordova-plugin-aviaryImageAnnotation      ✓
+cordova-plugin-gpstrack                   ✓
+cordova-plugin-RadaeePDF                  ✓
 
 ### Installation
 
     cordova plugin add cordova-plugin-whitelist
     cordova plugin add cordova-plugin-splashscreen
     cordova plugin add cordova-plugin-statusbar
-    cordova plugin add cordova-plugin-webviewcolor
+    cordova plugin add cordova-plugin-navigationbar-color   //Android only
+    cordova plugin add cordova-plugin-webviewcolor          //iOS only
     cordova plugin add cordova-plugin-device
     cordova plugin add cordova-plugin-camera
     cordova plugin add cordova-plugin-network-information
     cordova plugin add cordova-plugin-inappbrowser
-    cordova plugin add cordova-plugin-ionic-webview
-    cordova plugin add cordova-plugin-wkwebview-file-xhr
+    cordova plugin add cordova-plugin-ionic-webview         //iOS only
+    cordova plugin add cordova-plugin-wkwebview-file-xhr    //iOS only
     cordova plugin add cordova-plugin-geolocation
     cordova plugin add @havesource/cordova-plugin-push
     cordova plugin add cordova-plugin-x-socialsharing@5.0.12
-    cordova plugin add https://github.com/gearit/RadaeePDF-Cordova.git
     
     # cordova plugin add cordova-plugin-androidx
     # cordova plugin add cordova-plugin-androidx-adapter
@@ -34,10 +52,12 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
 
     cordova plugin add https://github.com/bestmob/cordova-plugin-gpstrack.git
 
+    cordova plugin add https://github.com/bestmob/cordova-plugin-RadaeePDF.git
+
     ------------------------
 
     cordova build android
-    
+
     cordova build ios
 
 ### Uninstall
@@ -45,17 +65,17 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
     cordova plugin rm cordova-plugin-whitelist
     cordova plugin rm cordova-plugin-splashscreen
     cordova plugin rm cordova-plugin-statusbar
-    cordova plugin rm cordova-plugin-webviewcolor
+    cordova plugin rm cordova-plugin-navigationbar-color    //Android
+    cordova plugin rm cordova-plugin-webviewcolor           //iOS
     cordova plugin rm cordova-plugin-device
     cordova plugin rm cordova-plugin-camera
     cordova plugin rm cordova-plugin-network-information
     cordova plugin rm cordova-plugin-inappbrowser
-    cordova plugin rm cordova-plugin-ionic-webview
-    cordova plugin rm cordova-plugin-wkwebview-file-xhr
+    # cordova plugin rm cordova-plugin-ionic-webview        //iOS
+    # cordova plugin rm cordova-plugin-wkwebview-file-xhr   //iOS
     cordova plugin rm cordova-plugin-geolocation
     cordova plugin rm havesource-cordova-plugin-push
     cordova plugin rm cordova-plugin-x-socialsharing
-    cordova plugin rm com.radaee.cordova
     
     # cordova plugin rm cordova-plugin-androidx
     # cordova plugin rm cordova-plugin-androidx-adapter
@@ -67,6 +87,7 @@ Top Notch Display Issue, Push Notification, PDF annotation , image plug in for i
     cordova plugin rm cordova-plugin-multiplePhotos
     cordova plugin rm cordova-plugin-aviaryImageAnnotation
     cordova plugin rm cordova-plugin-gpstrack
+    cordova plugin rm cordova-plugin-RadaeePDF
 
 ### Android Setup
 
@@ -180,7 +201,7 @@ cordova build ios
     Line 198: This line is used to disable edit button
       SetBtnEnabled(btn_annot, m_view.PDFCanSave());
       LOG.d("PDFCanSave>>>>>>>>>>>>", String.valueOf(m_view.PDFCanSave()));
-    
+
 - Notch Android Emulator (With P)
 
     https://hiteshdhamshaniya-wvmagic.medium.com/notch-android-emulator-with-p-e9b3556d9d5e
@@ -191,7 +212,7 @@ cordova build ios
       StatusBar.overlaysWebView(true);
     }
 ```
-    
+
     https://stackoverflow.com/questions/46232812/cordova-app-not-displaying-correctly-on-iphone-x-simulator
-    
-    
+
+    https://github.com/ZenCity/cordova-plugin-background-geolocation

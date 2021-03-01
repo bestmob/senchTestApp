@@ -22,7 +22,13 @@
         pictureSource=Camera.PictureSourceType;
         destinationType=Camera.DestinationType;
         StatusBar.overlaysWebView(true);
-        console.log(device.cordova);
+        
+        console.log(device.cordova, device.platform, typeof cordova);
+        
+        var devicePlatform = device.platform;
+        if( devicePlatform == "Android") {
+          //requestPermissions();
+        }
     }
     // Called when a photo is successfully retrieved
     function onPhotoDataSuccess(imageData) {
@@ -132,7 +138,7 @@
     function reopenImage() {
       var aviaryImage = document.getElementById('aviaryImage');
       aviaryImage.style.border='solid blue';
-      var imageName = "aviary-logo1";
+      var imageName = "aviary-re-" + (new Date().getTime()) + ".jpg";
       
       navigator.camera.getPicture(function onPhotoURISuccess(downloadImageUrl) {
         var aviaryImage = document.getElementById('aviaryImage');
@@ -152,28 +158,31 @@
       }, function onFail(message) {
         console.log('Failed because: ' + message);
       }, {
-        quality: 30,
-        targetWidth: 600,
-        targetHeight: 600,
-        destinationType: destinationType.FILE_URI
+        quality: 50,
+        targetWidth: 350,
+        targetHeight: 500,
+        destinationType: destinationType.FILE_URI,
+        correctOrientation: true
       });
     }
     // aviaryImageAnnotation reopenImage
     function openImage() {
       var aviaryImage = document.getElementById('aviaryImage');
       aviaryImage.style.border='solid green';
-      var imageName = "aviary-logo2";
+      var imageName = "aviary-" + (new Date().getTime()) + ".jpg";
       
       navigator.camera.getPicture(function onPhotoURISuccess(imageURI) {
         var aviaryImage = document.getElementById('aviaryImage');
         aviaryImage.src = imageURI;
+        console.log("camera.getPicture openImage >>>>>");
+        console.log(imageURI);
         
         cordova.plugins.aviaryImageAnnotation.open([imageURI, imageName], function success(val) {
           console.log("aviaryImageAnnotation openImage >>>>>");
           console.log(val);
           if (val.length > 0 && val !== "Cancel") {
-            imageURI = val[1];
-            aviaryImage.src = imageURI;
+            downloadImageUrl = val[1];
+            aviaryImage.src = downloadImageUrl;
             aviaryImage.style.border='solid yellow';
           }
         }, function fail() {
@@ -182,10 +191,11 @@
       }, function onFail(message) {
         console.log('Failed because: ' + message);
       }, {
-        quality: 30,
-        targetWidth: 600,
-        targetHeight: 600,
-        destinationType: destinationType.FILE_URI
+        quality: 50,
+        targetWidth: 350,
+        targetHeight: 500,
+        destinationType: destinationType.FILE_URI,
+        correctOrientation: true
       });
     }
     // ----------------------------------
@@ -213,7 +223,8 @@
       });
     }
     function radaeePDFOpen() {
-      var url = "https://test.buildshop.com/Documents/2219/Sample%20Project/Client/Drawings/basement-floor-plan-1.pdf";
+      var url = "https://test.buildshop.com/Documents/2219/Sample Project/Client/Drawings/basement-floor-plan-1.pdf";
+      url = encodeURI(url);
       var devicePlatform = device.platform;
       console.log("devicePlatform", devicePlatform);
       if( devicePlatform == "iOS") {
@@ -330,6 +341,29 @@
         alert('Connection type: ' + states[networkState]);
     }
     // ----------------------------------
+    // getUserLocation
+    function getUserLocation() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          alert('Latitude: '          + position.coords.latitude          + '\n' +
+              'Longitude: '         + position.coords.longitude         + '\n' +
+              'Altitude: '          + position.coords.altitude          + '\n' +
+              'Accuracy: '          + position.coords.accuracy          + '\n' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+              'Heading: '           + position.coords.heading           + '\n' +
+              'Speed: '             + position.coords.speed             + '\n' +
+              'Timestamp: '         + position.timestamp                + '\n');
+        }, function(d) {
+          var b = [];
+          b.coords = [];
+          b.coords.longitude = "";
+          b.coords.latitude = "";
+        }, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 10000
+        })
+    }
+    // ----------------------------------
     // gpstrack Start
     function gpstrackStart() {
         var baseApiURL = 'https://test.buildshop.mobi/api/';
@@ -376,6 +410,30 @@
         
         }, [""])
     }
+    // ----------------------------------
+    // requestPermissions
+    function requestPermissions() {
+        var permissions = cordova.plugins.permissions;
+        var permission_list = [
+          permissions.READ_EXTERNAL_STORAGE,
+          permissions.WRITE_EXTERNAL_STORAGE
+        ];
+        permissions.checkPermission(permission_list, success, null);
+        function error() {
+          console.warn('Camera or Accounts permission is not turned on');
+        }
+        function success(status) {
+          if( !status.hasPermission ) {
+            permissions.requestPermissions(
+              permission_list,
+              function(status) {
+                if( !status.hasPermission )
+                  error();
+              },
+              error);
+          }
+        }
+    }
     </script>
   </head>
   <body>
@@ -383,7 +441,7 @@
     <button onclick="takePicture1();">Capture Photo using custom Cordova exec</button> <br>
     <button onclick="capturePhoto();">Capture Photo using Camera plugin</button> <br>
     <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+    <img style="display:none;width:60px;height:85px;" id="smallImage" src="" />
     <img style="display:none;width: 40%;" id="largeImage" src="" />
     <hr>
     <!-- MultipleImageSelectionPlugin -->
@@ -394,7 +452,7 @@
     <hr>
     <!-- aviaryImageAnnotation -->
     <button onclick="reopenImage();">aviaryImageAnnotation reopenImage</button><br>
-    <img style="width:60px;height:60px;border:1px solid;" id="aviaryImage" src="images/logo.png" /><br>
+    <img style="width:60px;height:85px;border:1px solid;" id="aviaryImage" src="images/logo.png" /><br>
     <button onclick="openImage();">aviaryImageAnnotation openImage</button><br>
     <hr>
     <!-- RadaeePDF-Cordova Plugin -->
@@ -413,9 +471,15 @@
     <!-- checkConnection Cordova Plugin -->
     <button onclick="checkConnection();">checkConnection</button><br>
     <hr>
+    <!-- getUserLocation -->
+    <button onclick="getUserLocation();">geolocation.getCurrentPosition</button><br>
+    <hr>
     <!-- gpstrackStart Cordova Plugin -->
     <button onclick="gpstrackStart();">gpstrack start</button><br>
     <button onclick="gpstrackStop();">gpstrack stop</button><br>
+    <hr>
+    <!-- requestPermissions Android Plugin -->
+    <button onclick="requestPermissions();">request Permissions</button><br>
     <hr>
   </body>
 </html>

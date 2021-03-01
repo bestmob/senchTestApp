@@ -69,6 +69,9 @@
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription" comment="iOS 10 or below">
             <string>Buildshop would like to access your location when using the time sheet</string>
         </config-file>
+        <config-file target="*-Info.plist" parent="UIViewControllerBasedStatusBarAppearance">
+            <true/>
+        </config-file>
 
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
